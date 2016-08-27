@@ -1,0 +1,8 @@
+$ npm install --save react react-dom babelify babel-preset-react
+$ browserify -t [ babelify --presets [ react ] ] src/main/resources/static/main.js -o src/main/resources/static/bundle.js
+
+
+npm install --global babel-cli
+npm install babel-preset-react
+
+babel --presets react src/main/resources/static --watch --out-dir target/classes/static
