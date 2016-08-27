@@ -1,0 +1,19 @@
+{
+  "name": "basic",
+  "description": "this is basic spring webapp",
+  "main": "index.js",
+  "appPath" : "src/main/resources/static",
+  "authors": [
+    "sjh"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
