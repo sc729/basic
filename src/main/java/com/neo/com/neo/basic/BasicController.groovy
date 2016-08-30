@@ -14,5 +14,10 @@ class BasicController {
         'index'
     }
 
+    @RequestMapping(value = "/pro")
+    def proIndex(){
+        'index2'
+    }
+
 
 }

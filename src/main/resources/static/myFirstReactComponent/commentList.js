@@ -35,11 +35,17 @@ var CommentBox = React.createClass({
             }.bind(this)
         });
     },
+    //로딩 -> 실행
     getInitialState: function() {
         return {data: []};
     },
+
+    //로딩 -> 랜더링 -> 실행
     componentDidMount: function() {
         this.loadCommentsFromServer();
+        console.log(this.props.exp1);
+        console.log(this.props.exp2);
+        console.log(this.props.exp3);
         setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
     render: function() {
@@ -114,7 +120,8 @@ var CommentForm = React.createClass({
 });
 
 ReactDOM.render(
-    <CommentBox url="comments" pollInterval={2000} />,
+    <CommentBox url="/comments" pollInterval={2000} exp1="iii" exp2={'222'} exp3={3000}/>,
+    //{안에는 숫자만가능} '따옴표안에는 문자가능'
     document.getElementById('content')
     //<CommentBox data={data} />,
     //document.getElementById('content')
