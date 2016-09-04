@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify src/main/resources/static/index.js -t babelify -o bundle.js",
     "start": "watchify src/main/resources/static/index.js -v -t babelify -o bundle.js",
-    "run": "babel --presets react src/main/resources/static --watch --out-dir target/classes/static"
+    "babelify": "babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent"
   },
   "cacheDirectories": [
     "node_modules",
@@ -25,9 +25,10 @@
     "watchify": "^3.7.0"
   },
   "devDependencies": {
+    "bower": "1.7.9",
     "browser-sync": "^2.14.0",
     "del": "2.2.0",
-    "bower": "1.7.9",
-    "gulp": "3.9.1"
+    "gulp": "3.9.1",
+    "requirejs": "^2.2.0"
   }
 }

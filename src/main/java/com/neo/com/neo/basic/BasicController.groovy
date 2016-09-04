@@ -29,5 +29,10 @@ class BasicController {
 		'animate'
 	}
 
+    @RequestMapping(value = "/animate2")
+    def animate2(){
+        'animate2'
+    }
+
 
 }

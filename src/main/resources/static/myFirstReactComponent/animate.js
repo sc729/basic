@@ -11,6 +11,7 @@
         },
 
         componentWillUnmount: function() {
+          console.log('componentWillUnmount---------------------');
           clearInterval(this.interval);
         },
 
@@ -21,22 +22,25 @@
         render: function() {
           var children = [];
           var pos = 0;
-          var colors = ['red', 'gray', 'blue'];
+          var colors = ['red', 'gray', 'blue', 'yellow', 'green'];
           for (var i = this.state.current; i < this.state.current + colors.length; i++) {
             var style = {
               left: pos * 128,
               background: colors[i % colors.length]
             };
+
             pos++;
+            console.log('push! : ' + children);
             children.push(<div key={i} className="animateItem" style={style}>{i}</div>);
+
           }
           return (
             <CSSTransitionGroup
-              className="animateExample"
-              transitionEnterTimeout={250}
-              transitionLeaveTimeout={250}
-              transitionName="example">
-              {children}
+                className="animateExample"
+                transitionEnterTimeout={250}
+                transitionLeaveTimeout={250}
+                transitionName="example">
+                {children}
             </CSSTransitionGroup>
           );
         }

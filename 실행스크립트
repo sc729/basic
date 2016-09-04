@@ -5,4 +5,19 @@ $ browserify -t [ babelify --presets [ react ] ] src/main/resources/static/main.
 npm install --global babel-cli
 npm install babel-preset-react
 
+/* 별도로 설치 */
+bower install remarkable
+bower install json2
+bower install babel
+
+
 babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent
+
+
+
+https://github.com/facebook/draft-js
+https://github.com/kriasoft/react-starter-kit
+https://demo.reactstarterkit.com/
+http://d2.naver.com/news/7030975
+http://webframeworks.kr/tutorials/react/flux/
+http://fbdg.github.io/ironhee-2015-presentation/#/2

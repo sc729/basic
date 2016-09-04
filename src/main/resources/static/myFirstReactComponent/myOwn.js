@@ -56,11 +56,17 @@ var Something = React.createClass({
 
 var ShowField = React.createClass({
 	render : function(){
-		var data = this.props.inputValue;
+		var style = {
+			backgroundColor : 'yellow',
+			size : '180%'
+		};
+		if(this.props.inputValue.length < 3){
+			style.color = 'red'
+		}
 		return(
 			<div>
-				<blockquote>
-					<h1>{data}</h1>
+				<blockquote style={style}>
+					<h1>{this.props.inputValue}</h1>
 				</blockquote>
 			</div>
 		);
@@ -69,27 +75,28 @@ var ShowField = React.createClass({
 
 var TRList = React.createClass({
 	render : function(){
-		//console.log(this.props.list);
-		var list = this.props.list.map(
-			tr => { return (
-					<Tr trName={tr} key={tr} />	
-				);
-			}
-		);
+
 		return(
 			<div>
-				{list}
+				{this.props.list.map(
+							tr=>{ return <Tr trName={tr} key={tr} /> }
+						)
+				}
 			</div>
 		);
 	}
 });
 
+
 var Tr = React.createClass({
 	render : function(){
-		var trName = this.props.trName;
+		let style = {
+			display : 'inline-block',
+			marginRight: '10px'
+		};
 		return(
-			<div className="inline">
-				<span>{trName}</span>
+			<div style={style}>
+				<span>{this.props.trName}</span>
 			</div>
 		);
 	}
