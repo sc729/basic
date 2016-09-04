@@ -5,4 +5,4 @@ $ browserify -t [ babelify --presets [ react ] ] src/main/resources/static/main.
 npm install --global babel-cli
 npm install babel-preset-react
 
-babel --presets react src/main/resources/static --watch --out-dir target/classes/static
+babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent

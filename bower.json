@@ -2,7 +2,7 @@
   "name": "basic",
   "description": "this is basic spring webapp",
   "main": "index.js",
-  "appPath" : "src/main/resources/static",
+  "appPath": "src/main/resources/static",
   "authors": [
     "sjh"
   ],
@@ -15,5 +15,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "google-code-prettify": "^1.0.5"
+  }
 }
