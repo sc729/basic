@@ -20,7 +20,7 @@ var CommentBox = React.createClass({
         var comments = this.state.data;
         var newComments = comments.concat([comment]);
         this.setState({data: newComments});
-        $.ajax({
+        	$.ajax({
             url: this.props.url,
             contentType: 'application/json',
             dataType: 'json',
@@ -49,7 +49,9 @@ var CommentBox = React.createClass({
         setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
     render: function() {
-        return (
+        let dir = '';
+        console.log(dir);
+    	return (
             <div className="commentBox">
                 <h1>댓글</h1>
                 <CommentList data={this.state.data} />
@@ -59,6 +61,8 @@ var CommentBox = React.createClass({
     }
 });
 
+
+//list 처리하는 방법
 var CommentList = React.createClass({
     render: function() {
         var commentNodes = this.props.data.map(function (comment) {

@@ -18,6 +18,21 @@ class BasicController {
     def proIndex(){
         'index2'
     }
+	
+	@RequestMapping(value = "/myOwn")
+	def myOwn(){
+		'index3'
+	}
+	
+	@RequestMapping(value = "/animate")
+	def animate(){
+		'animate'
+	}
+
+    @RequestMapping(value = "/animate2")
+    def animate2(){
+        'animate2'
+    }
 
 
 }
