@@ -27,6 +27,7 @@
     "browser-sync": "^2.14.0",
     "del": "2.2.0",
     "bower": "1.7.9",
+    "event-stream": "browserify -t [ babelify --presets [ react ] ] main.js -o bundle.js3.3.2",
     "gulp": "3.9.1"
   }
 }

@@ -6,3 +6,13 @@ npm install --global babel-cli
 npm install babel-preset-react
 
 babel --presets react src/main/resources/static --watch --out-dir target/classes/static
+
+
+
+
+순서 
+
+npm install
+npm install --global babel-cli
+
+babel --presets react src/main/resources/static --watch --out-dir target/classes/static
