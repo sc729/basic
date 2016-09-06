@@ -33,6 +33,11 @@ class BasicController {
     def animate2(){
         'animate2'
     }
+	
+	@RequestMapping(value = "/myModule")
+	def myModule(){
+		'myModule'
+	}
 
 
 }
