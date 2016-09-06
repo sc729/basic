@@ -4,44 +4,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var trs = [
-   'acsw1002v',
-   'acsw1000v',
-   'acsv0350v',
-   'cssz0380u',
-   'gtbv1342c',
-   'otst0380u',
-   'acsv3242v',
-   'acgg1204v',
-   'sibalsekya'
-];
-
 
 var Something = React.createClass({
+	loadTrFromServer : function(){
+		$.ajax({
+            url: this.props.url,
+            dataType: 'json',
+            cache: false,
+            data : {trName : this.state.inputData},
+            success: function(receivedData) {
+                this.setState({trList: receivedData._embedded.trs || []});
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+	},
 	getInitialState : function(){
 		return {
-			data : "",
-			sortedData : []
+			inputData : "nodata",
+			trList : []
 		}
 	},
 	componentDidMount : function(){
-		console.log("didmount!!!");
+		//this.loadTrFromServer();
 	},
 	handleInput : function(inputData){
-		this.setState({data : inputData, sortedData : []});
 		
 		if(!inputData || inputData.length <3 ){
-			this.setState({sortedData : []});
+			this.setState({trList : []});
 			return;
+		}else{
+			this.setState({inputData : inputData});
+			this.loadTrFromServer();
 		}
 		
-		var newSortedData = [];
-		trs.map( tr => {
-			if(tr.indexOf(inputData)!=-1){
-				newSortedData.push(tr);
-			}
-		});
-		this.setState({sortedData : newSortedData});
 	},
 	render : function(){
 		var injectedTitle = this.props.title;
@@ -52,7 +49,7 @@ var Something = React.createClass({
 					<InputField onChange={this.handleInput}/>
 				</div>
 				<ShowField inputValue={this.state.data}/>
-				<TRList list={this.state.sortedData} />
+				<TRList list={this.state.trList} />
 			</div>
 		);
 	}
@@ -64,7 +61,7 @@ var ShowField = React.createClass({
 			backgroundColor : 'yellow',
 			size : '180%'
 		};
-		if(this.props.inputValue.length < 3){
+		if(!this.props.inputValue || this.props.inputValue.length < 3){
 			style.color = 'red'
 		}
 		return(
@@ -83,7 +80,7 @@ var TRList = React.createClass({
 		return(
 			<div>
 				{this.props.list.map(
-							tr=>{ return <Tr trName={tr} key={tr} /> }
+							tr=>{ return <Tr trName={tr.trName} key={tr.trName} trPurpose={tr.trPurpose} /> }
 						)
 				}
 			</div>
@@ -100,7 +97,7 @@ var Tr = React.createClass({
 		};
 		return(
 			<div style={style}>
-				<span>{this.props.trName}</span>
+				<span>{this.props.trName+'(' + this.props.trPurpose +')'}</span>
 			</div>
 		);
 	}
@@ -123,7 +120,7 @@ var InputField = React.createClass({
 
 
 ReactDOM.render(
-	<Something title="이것은 주입된 제목입니다." />,document.getElementById('content')
+	<Something url='/trs/search/findByTrNameIgnoreCaseContaining' title="new Tr search" />,document.getElementById('content')
 );
 
 

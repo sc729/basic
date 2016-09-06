@@ -20755,35 +20755,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * 
  */
-var trs = ['acsw1002v', 'acsw1000v', 'acsv0350v', 'cssz0380u', 'gtbv1342c', 'otst0380u', 'acsv3242v', 'acgg1204v', 'sibalsekya'];
-
 var Something = _react2.default.createClass({
 	displayName: 'Something',
 
+	loadTrFromServer: function loadTrFromServer() {
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			cache: false,
+			data: { trName: this.state.inputData },
+			success: function (receivedData) {
+				this.setState({ trList: receivedData._embedded.trs || [] });
+			}.bind(this),
+			error: function (xhr, status, err) {
+				console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
 	getInitialState: function getInitialState() {
 		return {
-			data: "",
-			sortedData: []
+			inputData: "nodata",
+			trList: []
 		};
 	},
 	componentDidMount: function componentDidMount() {
-		console.log("didmount!!!");
+		//this.loadTrFromServer();
 	},
 	handleInput: function handleInput(inputData) {
-		this.setState({ data: inputData, sortedData: [] });
 
 		if (!inputData || inputData.length < 3) {
-			this.setState({ sortedData: [] });
+			this.setState({ trList: [] });
 			return;
+		} else {
+			this.setState({ inputData: inputData });
+			this.loadTrFromServer();
 		}
-
-		var newSortedData = [];
-		trs.map(function (tr) {
-			if (tr.indexOf(inputData) != -1) {
-				newSortedData.push(tr);
-			}
-		});
-		this.setState({ sortedData: newSortedData });
 	},
 	render: function render() {
 		var injectedTitle = this.props.title;
@@ -20801,7 +20807,7 @@ var Something = _react2.default.createClass({
 				_react2.default.createElement(InputField, { onChange: this.handleInput })
 			),
 			_react2.default.createElement(ShowField, { inputValue: this.state.data }),
-			_react2.default.createElement(TRList, { list: this.state.sortedData })
+			_react2.default.createElement(TRList, { list: this.state.trList })
 		);
 	}
 });
@@ -20814,7 +20820,7 @@ var ShowField = _react2.default.createClass({
 			backgroundColor: 'yellow',
 			size: '180%'
 		};
-		if (this.props.inputValue.length < 3) {
+		if (!this.props.inputValue || this.props.inputValue.length < 3) {
 			style.color = 'red';
 		}
 		return _react2.default.createElement(
@@ -20842,7 +20848,7 @@ var TRList = _react2.default.createClass({
 			'div',
 			null,
 			this.props.list.map(function (tr) {
-				return _react2.default.createElement(Tr, { trName: tr, key: tr });
+				return _react2.default.createElement(Tr, { trName: tr.trName, key: tr.trName, trPurpose: tr.trPurpose });
 			})
 		);
 	}
@@ -20862,7 +20868,7 @@ var Tr = _react2.default.createClass({
 			_react2.default.createElement(
 				'span',
 				null,
-				this.props.trName
+				this.props.trName + '(' + this.props.trPurpose + ')'
 			)
 		);
 	}
@@ -20884,6 +20890,6 @@ var InputField = _react2.default.createClass({
 	}
 });
 
-_reactDom2.default.render(_react2.default.createElement(Something, { title: '이것은 주입된 제목입니다.' }), document.getElementById('content'));
+_reactDom2.default.render(_react2.default.createElement(Something, { url: '/trs/search/findByTrNameIgnoreCaseContaining', title: 'new Tr search' }), document.getElementById('content'));
 
 },{"react":171,"react-dom":28}]},{},[172]);
