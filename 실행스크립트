@@ -12,7 +12,7 @@ bower install json2
 bower install babel
 
 
-babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent
+
 
 
 
@@ -22,3 +22,5 @@ https://demo.reactstarterkit.com/
 http://d2.naver.com/news/7030975
 http://webframeworks.kr/tutorials/react/flux/
 http://fbdg.github.io/ironhee-2015-presentation/#/2
+http://easyreactbook.com/blog/react-fundamentals-configuring-browserify-babelify-and-react
+
