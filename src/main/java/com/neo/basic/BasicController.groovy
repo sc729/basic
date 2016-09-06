@@ -1,4 +1,4 @@
-package com.neo.com.neo.basic
+package com.neo.basic
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -33,6 +33,11 @@ class BasicController {
     def animate2(){
         'animate2'
     }
+	
+	@RequestMapping(value = "/myModule")
+	def myModule(){
+		'myModule'
+	}
 
 
 }
