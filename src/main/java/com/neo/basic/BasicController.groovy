@@ -39,5 +39,10 @@ class BasicController {
 		'myModule'
 	}
 
+    @RequestMapping(value = "/splited")
+    def splited(){
+        'splited'
+    }
+
 
 }

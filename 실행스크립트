@@ -1,10 +1,22 @@
 
-$ npm install --save react react-dom babelify babel-preset-react
-$ browserify -t [ babelify --presets [ react ] ] src/main/resources/static/main.js -o src/main/resources/static/bundle.js
+
+백업
+"build" : "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/static/myFirstReactComponent/myOwn.jsx > src/main/resources/static/bundle.js",
+"start" : "watchify src/main/resources/static/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle.js",
+"build-all": "babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent",
+"start-second" : "watchify src/main/resources/static/mySecondReactComponent/index.js -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle2.js"
+
+
+
 
 
 npm install --global babel-cli
 npm install babel-preset-react
+
+
+
+
+
 
 /* 별도로 설치 */
 bower install remarkable

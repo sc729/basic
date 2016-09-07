@@ -4,9 +4,7 @@
   "description": "this is basic spring webapp",
   "main": "index.js",
   "scripts": {
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/static/myFirstReactComponent/myOwn.jsx > src/main/resources/static/bundle.js",
-    "start": "watchify src/main/resources/static/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle.js",
-    "build-all": "babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent"
+    "start" : "gulp"
   },
   "cacheDirectories": [
     "node_modules",
