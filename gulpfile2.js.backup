@@ -1,0 +1,67 @@
+/**
+ * 
+ */
+
+var gulp = require('gulp');
+var concat = require('gulp-concat');// npm install gulp-concat --save-dev로 설치할것
+
+
+var staticPath = 'src/main/resources/static'
+
+/*
+ * gulp.task(name, deps, func);
+ * 
+ * name: task의 이름
+ * deps: 현재의 task에 선행되어야 하는 task배열 
+ * func: 수행할 task
+ * 
+ */
+	
+gulp.task('lint-js', function(){
+	return 
+	console.log('-----시작합니다----------------');
+});
+	
+
+gulp.task('combine-js', function () {
+	
+	console.log(gulp);
+	return 
+	gulp
+		
+	/*
+	대상이 되는 파일이나 경로
+	gulp.src([
+		'public/src/js/loginForm.js'
+		'public/src/js/slider/*.js'
+		'!public/src/js/slider/slider-beta.js'
+		] ...);
+	 */
+				
+		.src(staticPath + '/myFirstReactComponent/*.js')//	/**/*.js --> wildcard
+	/*
+	 * .pipe() 는 스트리밍 방식으로 계속 전달함.
+	 * 
+		.pipe(stripDebug())
+		.pipe(uglify())
+		.pipe(concat('script.js'))
+		.pipe(gulp.dest('public/dist/js'));	//-->최종으로 파일을 만든다.
+	 */
+		.pipe(concat('all.js'))
+		.pipe(gulp.dest('src/main/resources/static'));
+});
+
+
+gulp.task('watch', function () {
+	livereload.listen();
+	gulp.watch(paths.js, ['combine-js']);
+	gulp.watch(paths.scss, ['compile-sass']);
+	gulp.watch(paths.html, ['compress-html']);
+	gulp.watch(dist + '/**').on('change', livereload.changed);
+});
+
+
+
+
+//커맨드라인에서 그냥 gulp 만 쳤을 때 argument 없이 실행하는 것 정의
+gulp.task('default', ['combine-js']);

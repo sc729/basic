@@ -4,8 +4,8 @@
   "description": "this is basic spring webapp",
   "main": "index.js",
   "scripts": {
-    "build" : "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/static/myFirstReactComponent/myOwn.jsx > src/main/resources/static/bundle.js",
-    "start" : "watchify src/main/resources/static/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/static/myFirstReactComponent/myOwn.jsx > src/main/resources/static/bundle.js",
+    "start": "watchify src/main/resources/static/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle.js",
     "build-all": "babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent"
   },
   "cacheDirectories": [
@@ -29,6 +29,14 @@
     "browser-sync": "^2.14.0",
     "browserfy": "^1.0.0",
     "del": "2.2.0",
-    "gulp": "3.9.1"
+    "gulp": "3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-webserver": "^0.9.1"
   }
 }

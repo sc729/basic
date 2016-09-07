@@ -24,3 +24,13 @@ http://webframeworks.kr/tutorials/react/flux/
 http://fbdg.github.io/ironhee-2015-presentation/#/2
 http://easyreactbook.com/blog/react-fundamentals-configuring-browserify-babelify-and-react
 
+
+--gulp 설치
+
+gulp-webserver
+gulp-concat
+gulp-uglify
+gulp-minify-html
+gulp-sass
+gulp-livereload
+gulp-sourcemaps
