@@ -66,7 +66,12 @@ gulp.task('babelify', () => {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('src/main/resources/static'));
 });
-
+/*
+ * 순위 조정....
+ * 
+ * 바벨로.
+ * 
+ * */
 
 
 //기본 task 설정
