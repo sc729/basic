@@ -66,6 +66,20 @@ gulp.task('babelify', () => {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('src/main/resources/static'));
 });
+
+gulp.task('flux', () => {
+    return gulp.src('src/main/resources/static/myFirstFluxApp/app.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015', 'react']
+        }))
+        .pipe(concat('bundle.js'))
+        //.pipe(uglify())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('src/main/resources/static/myFirstFluxApp/'));
+});
+
+
 /*
  * 순위 조정....
  * 

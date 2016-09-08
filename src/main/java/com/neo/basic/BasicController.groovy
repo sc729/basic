@@ -43,6 +43,11 @@ class BasicController {
     def splited(){
         'splited'
     }
+	
+	@RequestMapping(value = "/flux")
+	def flux(){
+		'flux'
+	}
 
 
 }
