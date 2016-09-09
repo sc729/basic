@@ -1,13 +1,13 @@
 
 
 백업
-"build" : "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/static/myFirstReactComponent/myOwn.jsx > src/main/resources/static/bundle.js",
-"start" : "watchify src/main/resources/static/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle.js",
-"build-all": "babel --presets react src/main/resources/static/myFirstReactComponent --watch --out-dir target/classes/static/myFirstReactComponent",
-"start-second" : "watchify src/main/resources/static/mySecondReactComponent/index.js -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/static/bundle2.js"
+"build" : "browserify -t [ babelify --presets [ es2015 react ] ] src/main/resources/src/js/myFirstReactComponent/myOwn.jsx > src/main/resources/public/bundle.js",
+"start" : "watchify src/main/resources/src/js/myFirstReactComponent/myOwn.jsx -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/public/bundle.js",
+"build-all": "babel --presets react src/main/resources/src/js/myFirstReactComponent --watch --out-dir target/classes/public/myFirstReactComponent",
+"start-second" : "watchify src/main/resources/src/js/mySecondReactComponent/index.js -v -t [ babelify --presets [ es2015 react ] ]   -o src/main/resources/public/bundle2.js"
 
 
-"watchify src/main/resources/static/myFirstFluxApp/app.js -v -t [ babelify --presets [ es2015 react ] ] -o src/main/resources/static/myFirstFluxApp/bundle.js",
+"watchify src/main/resources/src/js/myFirstFluxApp/app.js -v -t [ babelify --presets [ es2015 react ] ] -o src/main/resources/public/bundle.js",
 
 
 npm install --global babel-cli

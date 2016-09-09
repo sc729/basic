@@ -60,11 +60,11 @@
         </dependency>
         -->
         
-        <!--이새끼때문에 frontend path를 못잡음 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!--이새끼때문에 frontend path를 못잡음 
          -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
