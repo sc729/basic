@@ -4,7 +4,7 @@
   "description": "this is basic spring webapp",
   "main": "index.js",
   "scripts": {
-    "start" : "gulp"
+    "start": "gulp"
   },
   "cacheDirectories": [
     "node_modules",
@@ -35,6 +35,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

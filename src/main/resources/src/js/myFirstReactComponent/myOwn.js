@@ -1,6 +1,6 @@
-/**
- * 
- */
+
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 var trs = [
    'acsw1002v',
@@ -9,9 +9,10 @@ var trs = [
    'cssz0380u',
    'gtbv1342c',
    'otst0380u',
-   'acsv3242v'
+   'acsv3242v',
+   'ajsd1111v',
+   'oneMoreThing'
 ];
-
 
 var Something = React.createClass({
 	getInitialState : function(){
@@ -21,6 +22,7 @@ var Something = React.createClass({
 		}
 	},
 	componentDidMount : function(){
+		console.log("그래 gulp로 연동이 되었어!!!")
 		console.log("didmount!!!");
 	},
 	handleInput : function(inputData){
@@ -43,6 +45,7 @@ var Something = React.createClass({
 		var injectedTitle = this.props.title;
 		return (
 			<div>
+				<h1>아니 근데 브라우져싱크는 왜 안되는거냐...???</h1>
 				<h1>{injectedTitle}</h1>
 				<div className="row">
 					<InputField onChange={this.handleInput}/>

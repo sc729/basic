@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 
 var Something = React.createClass({
 	loadTrFromServer : function(){
+		$.support.cors = true;
 		$.ajax({
             url: this.props.url,
             dataType: 'json',
@@ -117,10 +118,8 @@ var InputField = React.createClass({
 	}
 });
 
-
-
 ReactDOM.render(
-	<Something url='/trs/search/findByTrNameIgnoreCaseContaining' title="new Tr search" />,document.getElementById('content')
+	<Something url='http://localhost:8080/trs/search/findByTrNameIgnoreCaseContaining' title="new Tr search" />,document.getElementById('content')
 );
 
 

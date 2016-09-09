@@ -15,6 +15,7 @@ class Container extends Component{
     render(){
         return (
             <div>
+            	<h2>thats is!!</h2>
                 <h1>{this.props.title}</h1>
             </div>
         );

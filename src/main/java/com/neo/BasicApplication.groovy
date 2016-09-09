@@ -1,14 +1,17 @@
 package com.neo
 
-import com.neo.basic.api.Comment
-import com.neo.basic.api.CommentRepository
-import com.neo.basic.api.Tr
-import com.neo.basic.api.TrRepository;
-
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+
+import com.neo.basic.api.Comment
+import com.neo.basic.api.CommentRepository
+import com.neo.basic.api.Tr
+import com.neo.basic.api.TrRepository
 
 /**
  * Created by Suh on 2016-08-27.
@@ -45,7 +48,15 @@ class BasicApplication {
         }
     }
 
-
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				//registry.addMapping("/trs").allowedOrigins("http://localhost:8000");
+			}
+		};
+	}
 
 
 
