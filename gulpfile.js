@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const sourcemaps = require('gulp-sourcemaps')
-const webserver = require('gulp-webserver');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const minifyhtml = require('gulp-minify-html');
@@ -11,64 +10,67 @@ const babel = require('gulp-babel');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
+const browserSync = require('browser-sync');st
+
+const config = require('./gulp/gulp-config');
 
 
 
-const src = 'src/main/resources';
-const dist = 'target/classes';
-
-var distPath = {
-	publicPath : dist + '/public',
-	//templatePath : dist + '/templates'
-	templatePath : dist + '/public'
-}
-
-var paths = {
-	js: src + '/src/js/**/*.js',
-	scss: src + '/scss/*.scss',
-	html: src + '/template/**/*.html'
-};
-
-
-
-//웹서버를 localhost:8000 로 실행한다.
+/**
+ * 시작되있는 서버의 프록시에 싱크 웹서버를 연결한다.
+ */
 gulp.task('server', function () {
-	return gulp.src(distPath.templatePath)
-		.pipe(webserver());
+
+	browserSync({
+		socket: {
+			domain: "localhost:3000"
+		},
+		proxy: 'localhost:8080',
+		open: 'external'
+	});
+
+	return()=>{console.log('browserSync  started');};
 });
 
-// 자바스크립트 파일을 하나로 합치고 압축한다.
-gulp.task('combine-js', function () {
-	return browserify(src + '/src/js/myFirstReactComponent/myOwn2.js')
+
+/**
+ * 자바스크립트를 빌드하고 bundle.js로 합친 후에 웹서버와 싱크
+ * */
+gulp.task('build', function () {
+	return browserify(config.src.js + '/**/*.js')
 		.transform(babelify, {presets: ['react', 'es2015']})
 		.bundle()
 		.pipe(source('bundle.js'))
-		.pipe(gulp.dest(distPath.publicPath + '/'))
-		.pipe(livereload());;
+		.pipe(gulp.dest(config.dist.bundle + '/'))
+		.pipe(browserSync.reload({stream: true}));
 });
 
-// sass 파일을 css 로 컴파일한다.
+/**
+ * scss파일을 컴파일
+ * */
 gulp.task('compile-sass', function () {
-	return gulp.src(paths.scss)
+	return gulp.src( config.src.css )
 		.pipe(sass())
-		.pipe(gulp.dest(distPath.publicPath + '/css'));
+		.pipe(gulp.dest( config.dist.css ));
 });
 
-// HTML 파일을 압축한다.
+/**
+ * html파일을 압축함
+ * */
 gulp.task('compress-html', function () {
-	return gulp.src(paths.html)
+	return gulp.src( config.src.html )
 		.pipe(minifyhtml())
-		.pipe(gulp.dest(dist.templatePath + '/'));
+		.pipe(gulp.dest(  config.dist.html + '/'));
 });
 
-// 파일 변경 감지 및 브라우저 재시작
+
+/**
+ * 파일 변경 감지 및 브라우져 sync
+ * */
 gulp.task('watch', function () {
-	livereload.listen();
-	gulp.watch(src + '/src/js/**/*.*', ['combine-js']);
+	gulp.watch( config.src.js + '/**/*.*' , ['build']).on('change', browserSync.reload);
 	//gulp.watch(paths.scss, ['compile-sass']);
 	//gulp.watch(paths.html, ['compress-html']);
-	//gulp.watch(distPath.publicPath + '/**').on('change', livereload.changed);
-	//gulp.watch(distPath.publicPath + '/**', ['combine-js']);
 });
 
 
@@ -77,7 +79,7 @@ gulp.task('watch', function () {
 //기본 task 설정
 gulp.task('default', [
 	'server', 
-	'combine-js', 
+	'build',
 	//'compile-sass', 
 	//'compress-html', 
 	'watch' 

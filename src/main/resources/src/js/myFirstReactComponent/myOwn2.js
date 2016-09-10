@@ -45,6 +45,7 @@ var Something = React.createClass({
 		var injectedTitle = this.props.title;
 		return (
 			<div>
+				<h1>아오짱나  zz</h1>
 				<h1>{injectedTitle}</h1>
 				<div className="row">
 					<InputField onChange={this.handleInput}/>
@@ -119,7 +120,7 @@ var InputField = React.createClass({
 });
 
 ReactDOM.render(
-	<Something url='http://localhost:8080/trs/search/findByTrNameIgnoreCaseContaining' title="new Tr search" />,document.getElementById('content')
+	<Something url='/trs/search/findByTrNameIgnoreCaseContaining' title="new Tr search" />,document.getElementById('content')
 );
 
 

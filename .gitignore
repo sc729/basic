@@ -135,3 +135,9 @@ Desktop.ini
 /node_modules/
 /.apt_generated/
 /.factorypath
+/src/main/resources/static/bundle2.js
+.idea/
+src/main/java/com/neo/com/
+src/main/resources/static/bower_components/
+src/main/resources/static/bundle2.js
+target/
