@@ -7,10 +7,12 @@ const sass = require('gulp-sass');
 const livereload = require('gulp-livereload');
 const babel = require('gulp-babel');
 
+const es = require('event-stream')
+
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
-const browserSync = require('browser-sync');st
+const browserSync = require('browser-sync');
 
 const config = require('./gulp/gulp-config');
 
@@ -37,7 +39,7 @@ gulp.task('server', function () {
  * 자바스크립트를 빌드하고 bundle.js로 합친 후에 웹서버와 싱크
  * */
 gulp.task('build', function () {
-	return browserify(config.src.js + '/**/*.js')
+	return browserify(config.src.js + '/main.js')//최상위 모듈이 와야함.
 		.transform(babelify, {presets: ['react', 'es2015']})
 		.bundle()
 		.pipe(source('bundle.js'))
@@ -72,6 +74,11 @@ gulp.task('watch', function () {
 	//gulp.watch(paths.scss, ['compile-sass']);
 	//gulp.watch(paths.html, ['compress-html']);
 });
+
+
+
+
+
 
 
 

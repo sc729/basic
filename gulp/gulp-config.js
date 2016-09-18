@@ -9,10 +9,10 @@ module.exports = {
         html : srcPath + '/templates'
     },
     dist :{
-        bundle : '/public',
+        bundle : distPath + '/public',
         js : distPath + '/public/js',
         css : distPath + '/public/css,',
-        bower : distPath + '/public/bpwer_components',
+        bower : distPath + '/public/bower_components',
         html : distPath + '/templates'
     }
 };

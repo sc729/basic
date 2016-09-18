@@ -1,0 +1,410 @@
+
+
+var Sample = React.createClass({
+
+
+    /************************************************************************************************************************
+    *
+    *                                               1. LIFE CYCLE 관련 함수
+    *
+    *************************************************************************************************************************/
+
+    /**
+    * 컴포넌트가 DOM 트리에 추가되기 전 한 번만 호출됩니다. 초기화 처리를 하는 데 사용할 수 있습니다.
+    * 이 안에서 setState하면 render 시에 사용됩니다. Server-side rendering 시에도 호출되므로 어느 쪽에서도 동작할 수 있는 코드를 작성해야 합니다.
+    * Server-side rendering 시에도 호출 되므로 대도록 이 Lifecycle 메서드에서 DOM을 컨트롤 하는 브라우저에서만 동작하는 로직을 작성하면 안됩니다.
+    * Node.js 환경에서는 DOM이 없으므로 에러가 발생하게 됩니다.
+    */
+    componentWillMount : function(){
+        return {
+        };
+    },
+
+
+    /**
+    * 컴포넌트가 DOM 트리에 추가된 상태에 호출됩니다. DOM과 관련된 초기화를 하고 싶을 때 편리하게 사용할 수 있습니다.
+    * componentWillMount()와 다른 게 Server-side rendering 시에 호출되지 않습니다.
+    * 따라서 DOM을 다루는 처리 외에, Ajax 요청이나 setInterval 등의 Server-side rendering 시에는 불필요한 초기화 처리는 이 메서드를 통해 진행합니다.
+    */
+    componentDidMount : function(){
+        request.get('/path/to/api', res => {
+
+            /* ajax의 응답은 왔는데 unmount된 경우 이렇게 방어코드를 작성해야 한다. */
+            if (this.isMounted()) {
+              this.setState({data: res.body.data});
+            }
+        });
+    },
+
+
+    /**
+    * Prop이 갱신될 때 호출됩니다. 컴포넌트가 새로운 DOM 트리에 추가될 때는 호출되지 않습니다.
+    * 부모 컴포넌트의 State가 Prop으로 전달되고, 그 값이 변화한 할 때 화면의 표시 이외 Notification 같은 추가 작업을 이 메서드를 통해 할 수 있습니다.
+    * 마지막으로 Prop의 값에 따라 State의 값을 갱신 할 때에도 사용합니다.
+    */
+    componentWillReceiveProps : function(nextProps){
+
+    },
+
+    /**
+    * 이 메서드는 다른 메서드 Lifecycle 메서드와 달리 true나 false를 반환할 필요가 있습니다.
+    * 컴포넌트가 rerender 하기 전에 호출되며, 만약 false를 반환하면 VirtualDOM 비교를 하지 않고 rerender도 하지 않습니다.
+    * 즉, 독자적으로 Prop이나 State 비교 처리를 구현하는 것으로 불필요한 계산을 하지 않을 수 있습니다. 보통 성능 향상을 목적으로 사용합니다.
+    * 이 메서드가 반환하는 기본값은 true 이므로 재정의 하지 않으면 항상 rerender 합니다.
+    * 강제적으로 rerender 하고자 할땐 forceUpdate()를 사용합니다. forceUpdate()가 호출되는 경우엔 shouldComponentUpdate()는 호출되지 않습니다.
+    * Porp과 State가 Immutable한 데이터라면 다음과 같이 단순한 객체 비교로 구현이 가능합니다.
+    */
+    shouldComponentUpdate: function(nextProps, nextState) {
+      return nextProps.user !== this.props.user || nextState.user !== this.state.user;
+    },
+
+
+    /**
+    * 컴포넌트가 갱신되기 전에 호출됩니다. 최초엔 호출되지 않습니다.
+    * 이 안에서는 setState를 호출할 수 없으므로 Prop의 값을 이용해 setState 하고 싶은 경우엔 componentWillReceiveProps()를 사용합니다.
+    */
+    componentWillUpdate : function(nextProps, nextState){
+
+    },
+
+
+    /**
+    * 컴포넌트가 갱신된 뒤에 호출됩니다.
+    * 최초엔 호출되지 않습니다. DOM의 변화에 hook 하여 또 다른 작업을 하고 싶을 때 사용할 수 있습니다.
+    */
+    componentDidUpdate : function(prevProps, prevState){
+    },
+
+
+    /**
+    * 컴포넌트가 DOM에서 삭제될 때 호출됩니다.
+    * 이벤트 해제 같은 clean-up 처리 시 할 때 사용합니다.
+    * ComponentDidMount()에서 등록한 Timer의 처리나 DOM의 이벤트 등은 여기에서 해제해야 합니다.
+    */
+    function componentWillUnmount(){
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************************************************************************************************************************
+    *
+    *                                               2. EVENT
+    *
+    *************************************************************************************************************************/
+
+
+
+    /**
+    * SyntheticEvent
+    * React.js에서는 DOM을 VIRTUAL DOM으로 랩핑한 것처럼
+    * DOM의 이벤트 객체도 SyntheticEvent이라는 객체로 랩핑하여 크로스 브라우저에 대응하고 있습니다. SyntheticEvent의 인터페이스는 아래와 같습니다.
+    * -----------------------------------------
+    * boolean bubbles
+    * boolean cancelable
+    * DOMEventTarget currentTarget
+    * boolean defaultPrevented
+    * Number eventPhase
+    * boolean isTrusted
+    * DOMEvent nativeEvent
+    * void preventDefault()
+    * void stopPropagation()
+    * DOMEventTarget target
+    * Date timeStamp
+    * String type
+    * ------------------------------------------
+    */
+
+    /**
+    * event핸들러
+    */
+    onClick(e) {
+        // e is SyntheticEvent
+        this.setState({ count: this.state.count + 1 });
+    },
+    render() {
+        return (
+            <div>
+                <span>click count is {this.state.count}</span>
+                <button onClick={this.onClick}>click!</button>
+            </div>
+        );
+    },
+
+
+
+
+
+    /**
+    * unprovided event
+    *
+    * React.js가 지원하는 기본적인 이벤트 외에 window의 resize 이벤트나 jQuery Plugin의 독자 포멧 이벤트를 사용하고 싶은 경우
+    * componentDidMount()에서 addEventListener를 통해 이벤트를 등록하고
+    * componentWillUnmount()를 이용해 removeEventListener 하여 이벤트를 해제해 사용합니다.(참고) 참고로 이 경우 역시 this를 자동으로 bind 합니다.
+    *
+    */
+    handleResize(e) {
+        this.setState({windowWidth: window.innerWidth});
+    },
+    componentDidMount() {
+       window.addEventListener('resize', this.handleResize);
+    },
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    },
+
+
+
+
+    /***
+    * input 과 textarea
+    */
+    getInitialState() {
+        return {
+          textValue: "initial value"
+        };
+    },
+    changeText(e) {
+        this.setState({textValue: this.refs.inputText.getDOMNode().value });
+    },
+    render() {
+        return (
+          <div>
+            <p>{this.state.textValue}</p>
+            <input type="text" ref="inputText" defalutValue="initial value" />
+            <button onClick={this.changeText}>change</button>
+          </div>
+        );
+    }
+
+    /**
+    * select box
+    * 셀렉트 박스도 역시 value를 지정합니다. multiple={true}와 같이 Prop을 지정하면 요소를 복수로 선택할 수 있습니다
+    */
+    getDefaultProps() {
+        return {
+          answers: [1, 10, 100, 1000]
+        };
+    },
+    getInitialState() {
+        return {
+          selectValue: 1,
+          selectValues: [1,100]npnmnpm
+        };
+    },
+    onChangeSelectValue(e) {
+        this.setState({selectValue: e.target.value});
+    },
+    // 더 좋은 방법이 있을지...
+    onChangeSelectValues(e) {
+        var values = _.chain(e.target.options)
+          .filter(function(option) { return option.selected })
+          .map(function(option) { return +option.value })
+          .value()
+        ;
+        this.setState({selectValues: values});
+    },
+    render() {
+        var options = this.props.answers.map(function(answer) {
+            return <option value={answer} key={answer}>{answer}</option>;
+        });
+        return (
+          <div>
+            <div>selectValue: {this.state.selectValue}</div>
+            <div>
+              <select value={this.state.selectValue} onChange={this.onChangeSelectValue}>
+                {options}
+              </select>
+            </div>
+            <div>selectValues: {this.state.selectValues.join(',')}</div>
+            <div>
+              <select multiple={true} defaultValue={this.state.selectValues} onChange={this.onChangeSelectValues}>
+                {options}
+              </select>
+            </div>
+          </div>
+        );
+    }
+
+
+
+    /**
+    * LinkedStateMixin
+    * LinkedStateMixin이라는 addon을 사용하면 앞에서 처럼 onChange()를 일일이 구현하지 않아도 state에 반영할 수 있습니다.
+    * 체크박스에 사용할 때는 checkLink를 사용합니다.
+    */
+    mixins: [React.addons.LinkedStateMixin],
+    getInitialState() {
+        return {
+          textValue: 'initial value'
+        }
+    },
+    render() {
+        return (
+          <div>
+            <div>value: {this.state.textValue}</div>
+            <input type="text" valueLink={this.linkState('textValue')} />
+          </div>
+        );
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************************************************************************************************************************
+    *
+    *                                               3. spread attribute
+    *
+    *************************************************************************************************************************/
+
+    <ImageText text="이름" src="/img/foo.png" width="100" height="200" />
+
+    var ImageText = React.createClass({
+      render() {
+        var {text, ...other} = this.props;  //es6 deconstruct
+        return (
+          <span>{text}<img {...other} /></span> //일일이 안적어도 알아서 먹는다.
+        );
+      }
+    });
+
+
+
+
+
+    /************************************************************************************************************************
+    *
+    *                                               4. Ajax
+    *
+    *************************************************************************************************************************/
+
+    var request = require('superagent');
+    var ImageText = React.createClass({
+      onClick() {
+        request.get('/click_img', { img: this.props.src });
+      },
+      render() {
+        var {text, ...other} = this.props;
+        return (
+          <span>{text}<img {...other} onClick={this.onClick} /></span>
+        );
+      }
+    });
+
+
+
+
+
+
+
+    /************************************************************************************************************************
+    *
+    *                                               5. Mixin
+    *
+    *************************************************************************************************************************/
+
+    var MixinA = {
+      componentWillMount() {
+        console.log('mixinA');
+      }
+    };
+
+    var MixinB = {
+      componentWillMount() {
+        console.log('mixinB');
+      }
+    };
+
+    //외부함수를 배열로 넣으면 자체의 것으로 바인딩함.
+    //허나 클래스의 값과 믹스인으로 받은 값을 합친다. 키가 같은 경우에는 에러반환
+    //믹스인의 함수와 같은 이름의 함수를 클래스에서 정의하여도 에러 발생ㅞㅡ
+    var Hello = React.createClass({
+      mixins: [MixinA, MixinB],
+      componentWillMount() {
+        console.log('hello');
+      },
+      render() {
+        return <div>hello</div>
+      }
+    });
+
+
+
+
+
+
+    /************************************************************************************************************************
+    *
+    *                                               6. Animation
+    *
+    *************************************************************************************************************************/
+
+    var CSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+    var Hello = React.createClass({
+      getInitialState: function() {
+        return {
+          value: ''
+        };
+      },
+      onClick: function() {
+        var value = this.state.value === '(´・ω・｀)' ? '(｀･ω･´)ゞ' : '(´・ω・｀)';
+        this.setState({ value: value });
+      },
+      render: function() {
+        var value ;
+        if (this.state.value) {
+          value = (
+            <CSSTransitionGroup transitionName="sample">
+              <span className="sample" key={this.state.value}>{this.state.value}</span>
+            </CSSTransitionGroup>
+          );
+        }
+        return (
+          <div>
+            <div>Animation!!<button onClick={this.onClick}>click!!</button></div>
+              {value}
+          </div>
+        );
+      }
+    });
+
+    //css
+    .sample-enter {
+         -webkit-transition: 1s ease-in;
+    }
+    .sample-enter.sample-enter-active {
+        font-size: 80px;
+    }
+    .sample-leave {
+        -webkit-transition: .5s ease-out;
+    }
+    .sample-leave.sample-leave-active {
+        font-size: 10px;
+    }
+
+
+
+});
+
+

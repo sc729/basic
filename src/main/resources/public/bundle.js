@@ -20742,154 +20742,36 @@ module.exports = require('./lib/React');
 },{"./lib/React":54}],172:[function(require,module,exports){
 'use strict';
 
-var _react = require('react');
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by Suh on 2016-09-10.
+ */
+var React = required('react');
 
-var _react2 = _interopRequireDefault(_react);
+var NavBar = React.createClass({
+    displayName: 'NavBar',
 
-var _reactDom = require('react-dom');
+    getInitialState: function getInitialState() {
+        return {};
+    }
+});
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+exports.default = NavBar;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{}],173:[function(require,module,exports){
+'use strict';
 
 /**
- * 
+ * Created by Suh on 2016-09-10.
  */
-var Something = _react2.default.createClass({
-	displayName: 'Something',
 
-	loadTrFromServer: function loadTrFromServer() {
-		$.ajax({
-			url: this.props.url,
-			dataType: 'json',
-			cache: false,
-			data: { trName: this.state.inputData },
-			success: function (receivedData) {
-				this.setState({ trList: receivedData._embedded.trs || [] });
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error(this.props.url, status, err.toString());
-			}.bind(this)
-		});
-	},
-	getInitialState: function getInitialState() {
-		return {
-			inputData: "nodata",
-			trList: []
-		};
-	},
-	componentDidMount: function componentDidMount() {
-		//this.loadTrFromServer();
-	},
-	handleInput: function handleInput(inputData) {
+var React = require('react');
+var ReactDOM = require('react-dom');
 
-		if (!inputData || inputData.length < 3) {
-			this.setState({ trList: [] });
-			return;
-		} else {
-			this.setState({ inputData: inputData });
-			this.loadTrFromServer();
-		}
-	},
-	render: function render() {
-		var injectedTitle = this.props.title;
-		return _react2.default.createElement(
-			'div',
-			null,
-			_react2.default.createElement(
-				'h1',
-				null,
-				injectedTitle
-			),
-			_react2.default.createElement(
-				'div',
-				{ className: 'row' },
-				_react2.default.createElement(InputField, { onChange: this.handleInput })
-			),
-			_react2.default.createElement(ShowField, { inputValue: this.state.data }),
-			_react2.default.createElement(TRList, { list: this.state.trList })
-		);
-	}
-});
+var NavBar = require('./commonComponent/NavBar');
 
-var ShowField = _react2.default.createClass({
-	displayName: 'ShowField',
+ReactDOM.render(React.createElement(NavBar, null), document.getElementById('content'));
 
-	render: function render() {
-		var style = {
-			backgroundColor: 'yellow',
-			size: '180%'
-		};
-		if (!this.props.inputValue || this.props.inputValue.length < 3) {
-			style.color = 'red';
-		}
-		return _react2.default.createElement(
-			'div',
-			null,
-			_react2.default.createElement(
-				'blockquote',
-				{ style: style },
-				_react2.default.createElement(
-					'h1',
-					null,
-					this.props.inputValue
-				)
-			)
-		);
-	}
-});
-
-var TRList = _react2.default.createClass({
-	displayName: 'TRList',
-
-	render: function render() {
-
-		return _react2.default.createElement(
-			'div',
-			null,
-			this.props.list.map(function (tr) {
-				return _react2.default.createElement(Tr, { trName: tr.trName, key: tr.trName, trPurpose: tr.trPurpose });
-			})
-		);
-	}
-});
-
-var Tr = _react2.default.createClass({
-	displayName: 'Tr',
-
-	render: function render() {
-		var style = {
-			display: 'inline-block',
-			marginRight: '10px'
-		};
-		return _react2.default.createElement(
-			'div',
-			{ style: style },
-			_react2.default.createElement(
-				'span',
-				null,
-				this.props.trName + '(' + this.props.trPurpose + ')'
-			)
-		);
-	}
-});
-
-var InputField = _react2.default.createClass({
-	displayName: 'InputField',
-
-	handleInputValueChange: function handleInputValueChange() {
-		this.props.onChange(this.refs.inputValue.value);
-		return;
-	},
-	render: function render() {
-		return _react2.default.createElement(
-			'div',
-			null,
-			_react2.default.createElement('input', { type: 'text', ref: 'inputValue', onChange: this.handleInputValueChange })
-		);
-	}
-});
-
-_reactDom2.default.render(_react2.default.createElement(Something, { url: '/trs/search/findByTrNameIgnoreCaseContaining', title: 'new Tr search' }), document.getElementById('content'));
-
-},{"react":171,"react-dom":28}]},{},[172]);
+},{"./commonComponent/NavBar":172,"react":171,"react-dom":28}]},{},[173]);
